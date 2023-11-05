@@ -1,4 +1,4 @@
-import { type Cpf } from './Types/CPF'
+import { type Cpf } from './Types/Cpf'
 import { type Email } from './Types/Email'
 import { type Phone } from './Types/Phone'
 
