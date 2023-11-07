@@ -4,8 +4,14 @@ export class Email {
   }
 
   set email (email: string) {
-    if (this.checkEmail(email)) {
+    try {
+      if (!this.checkEmail(email)) {
+        throw new Error('E-mail is invalid!')
+      }
+
       this._email = email
+    } catch (e: any) {
+      console.log(e.message)
     }
   }
 

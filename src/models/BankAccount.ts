@@ -13,8 +13,14 @@ export class BankAccount implements Model {
   ) {}
 
   set id (id: number) {
-    if (id > 0) {
+    try {
+      if (!(id > 0)) {
+        throw new Error('ID is invalid!')
+      }
+
       this._id = id
+    } catch (e: any) {
+      console.log(e.message)
     }
   }
 
@@ -23,8 +29,14 @@ export class BankAccount implements Model {
   }
 
   set accountNumber (accountNumber: number) {
-    if (accountNumber > 0) {
+    try {
+      if (!(accountNumber > 0)) {
+        throw new Error('Account number is invalid!')
+      }
+
       this._accountNumber = accountNumber
+    } catch (e: any) {
+      console.log(e.message)
     }
   }
 
@@ -33,8 +45,10 @@ export class BankAccount implements Model {
   }
 
   set balance (balance: number) {
-    if (balance > 0) {
+    try {
       this._balance = balance
+    } catch (e: any) {
+      console.log(e.message)
     }
   }
 
@@ -51,8 +65,14 @@ export class BankAccount implements Model {
   }
 
   set agency (agency: number) {
-    if (agency > 0) {
+    try {
+      if (!(agency > 0)) {
+        throw new Error('Agency is invalid!')
+      }
+
       this._agency = agency
+    } catch (e: any) {
+      console.log(e.message)
     }
   }
 

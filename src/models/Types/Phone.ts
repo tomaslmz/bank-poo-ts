@@ -4,8 +4,13 @@ export class Phone {
   }
 
   set phone (phone: string) {
-    if (this.checkPhone(phone)) {
+    try {
+      if (!this.checkPhone(phone)) {
+        throw new Error('Phone is invalid!')
+      }
       this._phone = phone
+    } catch (e: any) {
+      console.log(e.message)
     }
   }
 

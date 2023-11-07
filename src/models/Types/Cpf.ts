@@ -1,9 +1,17 @@
 export class Cpf {
-  constructor (private _cpf: string) {}
+  constructor (private _cpf: string) {
+    this.cpf = _cpf
+  }
 
   set cpf (cpf: string) {
-    if (this.checkCpf(cpf)) {
+    try {
+      if (!this.checkCpf(cpf)) {
+        throw new Error('CPF is invalid!')
+      }
+
       this._cpf = cpf
+    } catch (e: any) {
+      console.log(e.message)
     }
   }
 

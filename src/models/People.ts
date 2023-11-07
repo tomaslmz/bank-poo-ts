@@ -14,8 +14,14 @@ export class People implements Model {
   ) {}
 
   set id (id: number) {
-    if (id > 0) {
+    try {
+      if (!(id > 0)) {
+        throw new Error('ID is invalid!')
+      }
+
       this._id = id
+    } catch (e: any) {
+      console.log(e.message)
     }
   }
 
@@ -24,8 +30,14 @@ export class People implements Model {
   }
 
   set name (name: string) {
-    if (name.length > 0) {
+    try {
+      if (!(name.length > 0)) {
+        throw new Error('Name is invalid!')
+      }
+
       this._name = name
+    } catch (e: any) {
+      console.log(e.message)
     }
   }
 
