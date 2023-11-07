@@ -6,12 +6,31 @@ import { type Phone } from './Types/Phone'
 export class People implements Model {
   constructor (
     private _id: number,
-    private _createdAt: Date,
     private _name: string,
-    private _email: Email,
-    private _phone: Phone,
-    private _cpf: Cpf
-  ) {}
+    private _createdAt: Date,
+    private _email?: Email,
+    private _phone?: Phone,
+    private _cpf?: Cpf,
+  ) {
+
+    this.id = _id
+    
+    this.name = _name
+
+    if (_email !== undefined) {
+      this.email = _email
+    }
+
+    this.createdAt = _createdAt
+
+    if (_cpf !== undefined) {
+      this.cpf = _cpf
+    }
+
+    if (_phone !== undefined) {
+      this.phone = _phone
+    }
+  }
 
   set id (id: number) {
     try {
@@ -49,7 +68,11 @@ export class People implements Model {
     this._email = email
   }
 
-  get email (): string {
+  get email (): string | undefined {
+    if(this._email === undefined) {
+      return ''
+    }
+
     return this._email.email
   }
 
@@ -58,6 +81,10 @@ export class People implements Model {
   }
 
   get phone (): string {
+    if(this._phone === undefined) {
+      return ''
+    }
+
     return this._phone.phone
   }
 
@@ -66,6 +93,10 @@ export class People implements Model {
   }
 
   get cpf (): string {
+    if(this._cpf === undefined) {
+      return ''
+    }
+
     return this._cpf.cpf
   }
 
