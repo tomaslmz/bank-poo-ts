@@ -130,6 +130,26 @@ export class BankAccount implements Model {
     }
   }
 
+  transfer(value: number, destiny: string) {
+    try {
+      if(value <= 0) {
+        throw new Error('Invalid value!');
+      }
+
+      if(value > this._balance) {
+        throw new Error('Insufficient balance!');
+      }
+
+      if(destiny == '') {
+        throw new Error('Invalid destiny!');
+      }
+
+      this.balance = this._balance - value;
+    } catch(e: any) {
+      console.log(e.message);
+    }
+  }
+
   addExtract (type: string, value: number, destiny?: string, fee?: number): void {
     try {
       const regex = /^[A-Za-z]+$/
