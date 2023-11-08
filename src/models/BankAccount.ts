@@ -2,14 +2,15 @@ import { type Model } from './Interfaces/Model'
 import { type People } from './People'
 
 export class BankAccount implements Model {
+  private readonly _extract: string[] = [];
+
   constructor (
     private _id: number,
-    private _accountNumber: number,
-    private _balance: number = 0,
     private _holder: People,
-    private _agency: number,
-    private readonly _extract: string[],
-    private _createdAt: Date
+    private _accountNumber: number = 1,
+    private _balance: number = 0,
+    private _agency: number = 1,
+    private _createdAt: Date = new Date()
   ) {
     this.id = _id
     this.accountNumber = _accountNumber
@@ -110,6 +111,7 @@ export class BankAccount implements Model {
       }
 
       this.balance = this._balance - value
+      this.addExtract('Withdraw', value);
     } catch (e: any) {
       console.log(e.message)
     }
@@ -118,10 +120,11 @@ export class BankAccount implements Model {
   deposit (value: number): void {
     try {
       if (value <= 0) {
-        throw new Error('Insert a valid value to withdraw!')
+        throw new Error('Insert a valid value to deposit!')
       }
 
       this.balance = this._balance + value
+      this.addExtract('Deposit', value);
     } catch (e: any) {
       console.log(e.message)
     }

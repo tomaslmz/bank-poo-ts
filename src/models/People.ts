@@ -7,7 +7,7 @@ export class People implements Model {
   constructor (
     private _id: number,
     private _name: string,
-    private _createdAt: Date,
+    private _createdAt: Date = new Date(),
     private _email?: Email,
     private _phone?: Phone,
     private _cpf?: Cpf,
