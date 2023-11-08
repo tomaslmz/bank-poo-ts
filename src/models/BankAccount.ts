@@ -110,10 +110,10 @@ export class BankAccount implements Model {
         throw new Error('Insert a valid value to withdraw!')
       }
 
-      this.balance = this._balance - value
       this.addExtract('Withdraw', value);
+      this.balance = this._balance - value
     } catch (e: any) {
-      console.log(e.message)
+      console.log(e.message);
     }
   }
 
@@ -140,10 +140,11 @@ export class BankAccount implements Model {
         throw new Error('Insufficient balance!');
       }
 
-      if(destiny == '') {
-        throw new Error('Invalid destiny!');
+      if(destiny.length == 0) {
+        throw new Error('Insert a valid destiny!');
       }
 
+      this.addExtract('Transfer', value, destiny);
       this.balance = this._balance - value;
     } catch(e: any) {
       console.log(e.message);
@@ -152,7 +153,7 @@ export class BankAccount implements Model {
 
   addExtract (type: string, value: number, destiny?: string, fee?: number): void {
     try {
-      const regex = /^[A-Za-z]+$/
+      const regex = /([a-zA-Z]|[à-ü]|[À-Ü])/
 
       if (type === '' || !regex.test(type)) {
         throw new Error('Insert a valid type!')
@@ -160,10 +161,6 @@ export class BankAccount implements Model {
 
       if (value === 0) {
         throw new Error('Insert a valid value!')
-      }
-
-      if (value > this._balance) {
-        throw new Error('You don\'t have sufficient balance!')
       }
 
       let extract = `\nType: ${type}\nValue: ${value}`
